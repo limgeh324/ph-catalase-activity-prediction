@@ -10,13 +10,13 @@
 
 ## 연구 배경
 
-카탈레이스는 과산화수소(H₂O₂)를 물과 산소로 분해하는 효소이다.
+카탈레이스는 과산화수소(H₂O₂)를 물(H₂O)과 산소(O₂)로 분해하는 효소이다.
 
-반응식은 다음과 같다.
+반응식:
 
-\[
-2H_2O_2 \rightarrow 2H_2O + O_2
-\]
+```text
+2H₂O₂ → 2H₂O + O₂
+```
 
 효소 활성은 pH와 같은 환경 조건에 따라 변화하며, 일반적으로 특정 pH 범위에서 가장 높은 활성을 보인다.
 
@@ -49,12 +49,12 @@
 
 효소 활성도는 다음과 같이 정의하였다.
 
-\[
-Activity = m_0 - m
-\]
+```text
+Activity = m0 - m
+```
 
-- \(m_0\): 기준 질량
-- \(m\): 반응 후 측정 질량
+- `m0`: 기준 질량
+- `m`: 반응 후 측정 질량
 
 즉, 질량 감소량이 클수록 더 많은 산소가 발생한 것으로 해석하였다.
 
@@ -72,7 +72,7 @@ Activity = m_0 - m
 
 예:
 
-- pH 4 → pH 7 사이의 중간값 생성
+- pH 4 ~ pH 7 사이의 중간값 생성
 
 ### 2. Monte Carlo 시뮬레이션
 
@@ -80,13 +80,20 @@ Activity = m_0 - m
 
 사용한 식:
 
-\[
-y*{sim}=y*{obs}+\epsilon
-\]
+```text
+y_sim = y_obs + ε
+```
 
-\[
-\epsilon \sim N(0,\sigma^2)
-\]
+```text
+ε ~ N(0, σ²)
+```
+
+설명:
+
+- `y_sim`: 생성된 가상 데이터
+- `y_obs`: 실제 실험 데이터
+- `ε`: 랜덤 오차
+- `N(0, σ²)`: 평균이 0이고 분산이 σ²인 정규분포
 
 이를 통해 실제 실험에서 발생할 수 있는 측정 오차를 모사하였다.
 
@@ -96,12 +103,14 @@ y*{sim}=y*{obs}+\epsilon
 
 본 프로젝트에서는 2차 Polynomial Regression 모델을 사용하였다.
 
-\[
-y=ax^2+bx+c
-\]
+회귀식:
 
-- \(x\): pH
-- \(y\): 효소 활성도
+```text
+y = ax² + bx + c
+```
+
+- `x`: pH
+- `y`: 효소 활성도
 
 이를 통해 연속적인 pH 범위에서 효소 활성을 예측하였다.
 
@@ -126,3 +135,76 @@ y=ax^2+bx+c
 ```bash
 pip install pandas numpy matplotlib scikit-learn joblib
 ```
+
+---
+
+### 1. 데이터 생성
+
+```bash
+python data_generation.py
+```
+
+### 2. 데이터 시각화
+
+```bash
+python plot_data.py
+```
+
+### 3. 회귀 모델 학습
+
+```bash
+python regression.py
+```
+
+### 4. 회귀 곡선 비교
+
+```bash
+python plot_comparison.py
+```
+
+### 5. 효소 활성 예측
+
+```bash
+python predict.py
+```
+
+---
+
+## 사용 라이브러리
+
+- NumPy
+- Pandas
+- Matplotlib
+- Scikit-learn
+
+---
+
+## 핵심 개념
+
+- 카탈레이스 효소 활성
+- 효소 반응 속도
+- pH 의존성
+- Polynomial Regression
+- Monte Carlo Simulation
+- Noise Injection
+- Data Augmentation
+
+---
+
+## 한계점
+
+본 프로젝트는 실제 실험 데이터 수가 적고 반복 실험이 부족하다는 한계를 가진다.
+
+따라서 모델의 예측 정확도보다는, 생명과학 실험 데이터에 머신러닝 기법을 적용하는 과정 자체에 의의를 둔다.
+
+---
+
+## 향후 개선 방향
+
+- 더 다양한 pH 조건 실험
+- 반복 실험 수행
+- 실제 산소 센서를 이용한 정밀 측정
+- 다양한 회귀 모델 비교
+- 비선형 효소 반응 모델 적용
+
+---
